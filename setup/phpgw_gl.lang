@@ -1,0 +1,25 @@
+%1 - %2 of %3	sambaadmin	gl	%1 - %2 de %3
+add workstation	sambaadmin	gl	engadir estación de traballo
+check ldap setup (experimental!!!)	admin	gl	verificar configuración ldap (experimental)
+computer group	admin	gl	Grupo do computador
+computer ou	admin	gl	ou do computador
+displayname	sambaadmin	gl	Nome para mostrar
+do you really want to delete selected workstation accounts?	sambaadmin	gl	Está certo de querer eliminar as contas das estacións de traballo seleccionadas?
+homedrive	admin	gl	Unidade de inicio
+homepath	sambaadmin	gl	Camiño de inicio
+logonscript	admin	gl	Script de inicio de sesión
+new account defaults	admin	gl	Predefinicións de novas contas
+participants	sambaadmin	gl	Participantes
+path to mkntpwd	admin	gl	Camiño ao ficheiro de contrasinais
+profilepath	admin	gl	Camiño ao perfil
+samba config	sambaadmin	gl	Configuración de samba
+samba settings	common	gl	Opcións de samba
+samba sid	admin	gl	SID de Samba
+sambaadmin	common	gl	Administración de Samba
+smb homepath	admin	gl	camiño a smb
+workstation account for	sambaadmin	gl	conta de estación de traballo para
+workstation configuration	sambaadmin	gl	configuración da estación de traballo
+workstation list	sambaadmin	gl	lista de estacións de traballo
+workstation name	sambaadmin	gl	nome da estación de traballo
+workstationaccount active	sambaadmin	gl	conta da estación de traballo activa
+workstations	sambaadmin	gl	estacións de traballo
