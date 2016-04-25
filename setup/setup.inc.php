@@ -34,7 +34,7 @@ $setup_info['sambaadmin']['hooks']['addaccount']	= 'sambaadmin.bosambaadmin.upda
 $setup_info['sambaadmin']['hooks']['editaccount']	= 'sambaadmin.bosambaadmin.updateAccount';
 $setup_info['sambaadmin']['hooks']['addgroup']		= 'sambaadmin.bosambaadmin.updateGroup';
 $setup_info['sambaadmin']['hooks']['editgroup']		= 'sambaadmin.bosambaadmin.updateGroup';
-$setup_info['sambaadmin']['hooks']['admin']		    = 'sambaadmin.bosambaadmin.admin';
+$setup_info['sambaadmin']['hooks']['admin']		    = 'bosambaadmin::admin';
 $setup_info['sambaadmin']['hooks']['edit_user']		= 'sambaadmin.bosambaadmin.edit_user';
 
 /* Dependacies for this app to work */

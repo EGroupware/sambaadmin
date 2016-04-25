@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//Stylite AG//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="sambaadmin.config" template="" lang="" group="0" version="16.1">
+		<grid width="100%" class="admin-config egwGridView_grid">
+			<columns>
+				<column width="60%"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<description value="Samba SID" label="%s:"/>
+					<textbox id="newsettings[sambasid]" size="60"/>
+				</row>
+				<row>
+					<description value="computer ou" label="%s:"/>
+					<textbox id="newsettings[samba_computerou]" size="60"/>
+				</row>
+				<row>
+					<description value="computer group" label="%s:"/>
+					<textbox id="newsettings[samba_computergroup]" size="60"/>
+				</row>
+				<row>
+					<description value="Generate old Lanmanager password hash?"/>
+					<select id="newsettings[samba_lmpassword]">
+						<option value="">{No} - {more secure}</option>
+						<option value="yes">Yes</option>
+					</select>
+				</row>
+				<row>
+					<description value="new account defaults" span="all" class="subHeader"/>
+				</row>
+				<row>
+					<description value="smb homepath" label="%s:"/>
+					<textbox id="newsettings[samba_homepath]" size="60"/>
+				</row>
+				<row>
+					<description value="homedrive" label="%s:"/>
+					<textbox id="newsettings[samba_homedrive]" size="60"/>
+				</row>
+				<row>
+					<description value="logonscript" label="%s:"/>
+					<textbox id="newsettings[samba_logonscript]" size="60"/>
+				</row>
+				<row>
+					<description value="profilepath" label="%s:"/>
+					<textbox id="newsettings[samba_profilepath]" size="60"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+</overlay>

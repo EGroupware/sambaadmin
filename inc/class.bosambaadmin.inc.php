@@ -141,11 +141,11 @@
 			return true;
 		}
 
-		function admin()
+		public static function admin()
 		{
 			$appname = 'sambaadmin';
 			$file = array(
-				'Site Configuration'	=> egw::link('/index.php','menuaction=admin.uiconfig.index&appname='.$appname),
+				'Site Configuration'	=> egw::link('/index.php','menuaction=admin.admin_config.index&appname='.$appname.'&ajax=true'),
 				//'check ldap setup (experimental!!!)'	=> egw::link('/index.php','menuaction=sambaadmin.uisambaadmin.checkLDAPSetup'),
 			);
 			if ($GLOBALS['egw_info']['server']['ldap_host']) display_section($appname,$appname,$file);
