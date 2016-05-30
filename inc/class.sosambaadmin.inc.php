@@ -36,9 +36,8 @@
 			$filter = "(&(uidnumber=$_accountID)(objectclass=sambasamaccount))";
 
 			$sri = @ldap_search($ldap,$GLOBALS['egw_info']['server']['ldap_context'],$filter);
-			if ($sri)
+			if ($sri && ($allValues = ldap_get_entries($ldap, $sri)) && $allValues['count'])
 			{
-				$allValues 	= ldap_get_entries($ldap, $sri);
 				$accountDN 	= $allValues[0]['dn'];
 
 				if($_newPassword)
@@ -227,9 +226,8 @@
 			$filter = "(&(uidnumber=$_accountID)(objectclass=sambasamaccount))";
 
 			$sri = @ldap_search($ldap,$GLOBALS['egw_info']['server']['ldap_context'],$filter);
-			if ($sri)
+			if ($sri && ($allValues = ldap_get_entries($ldap, $sri)) && $allValues['count'])
 			{
-				$allValues      = ldap_get_entries($ldap, $sri);
 				$accountDN      = $allValues[0]['dn'];
 
 				$newData['sambaPwdLastSet']     = time();
@@ -306,22 +304,18 @@
 			$filter = "(&(uidnumber=$_accountID)(objectclass=sambaSamAccount))";
 
 			$sri = @ldap_search($ldap,$dn,$filter);
-			if ($sri)
+			if ($sri && ($allValues = ldap_get_entries($ldap, $sri)) && $allValues['count'])
 			{
-				$allValues = ldap_get_entries($ldap, $sri);
-				if ($allValues['count'] > 0)
-				{
-					#print "found something<br>";
-					$userData = array();
-					$userData["displayname"]	= translation::convert($allValues[0]["displayname"][0],'utf-8');
-					$userData["sambahomedrive"]	= translation::convert($allValues[0]["sambahomedrive"][0],'utf-8');
-					$userData["sambahomepath"]	= translation::convert($allValues[0]["sambahomepath"][0],'utf-8');
-					$userData["sambalogonscript"]	= translation::convert($allValues[0]["sambalogonscript"][0],'utf-8');
-					$userData["sambaprofilepath"]	= translation::convert($allValues[0]["sambaprofilepath"][0],'utf-8');
-					$userData["uid"]		= $allValues[0]["uid"][0];
+				#print "found something<br>";
+				$userData = array();
+				$userData["displayname"]	= translation::convert($allValues[0]["displayname"][0],'utf-8');
+				$userData["sambahomedrive"]	= translation::convert($allValues[0]["sambahomedrive"][0],'utf-8');
+				$userData["sambahomepath"]	= translation::convert($allValues[0]["sambahomepath"][0],'utf-8');
+				$userData["sambalogonscript"]	= translation::convert($allValues[0]["sambalogonscript"][0],'utf-8');
+				$userData["sambaprofilepath"]	= translation::convert($allValues[0]["sambaprofilepath"][0],'utf-8');
+				$userData["uid"]		= $allValues[0]["uid"][0];
 
-					return $userData;
-				}
+				return $userData;
 			}
 
 			// if we did not return before, return false
@@ -338,10 +332,8 @@
 			$filter = "(&(uidnumber=$_uidNumber)(objectclass=sambasamaccount))";
 
 			$sri = @ldap_search($ldap,$dn,$filter);
-			if($sri)
+			if($sri && ($allValues = ldap_get_entries($ldap,$sri)) && $allValues['count'])
 			{
-				$allValues = ldap_get_entries($ldap,$sri);
-
 				$workstationData['workstationName'] 	= $allValues[0]['uid'][0];
 				$workstationData['workstationID'] 	= $allValues[0]['uidnumber'][0];
 				$workstationData['description'] 	= $allValues[0]['description'][0];
@@ -447,9 +439,8 @@
 			$filter = "(&(uidnumber=$_accountID)(objectclass=posixaccount))";
 
 			$sri = @ldap_search($ldap,$GLOBALS['egw_info']['server']['ldap_context'],$filter);
-			if ($sri)
+			if ($sri && ($allValues = ldap_get_entries($ldap, $sri)) && $allValues['count'])
 			{
-				$allValues 	= ldap_get_entries($ldap, $sri);
 				$accountDN 	= $allValues[0]['dn'];
 				$uid	   	= $allValues[0]['uid'][0];
 				$uidnumber	= $allValues[0]['uidnumber'][0];
@@ -561,9 +552,8 @@
 			$filter = "(&(gidnumber=$groupID)(objectclass=posixgroup))";
 
 			$sri = @ldap_search($ldap,$GLOBALS['egw_info']['server']['ldap_group_context'],$filter);
-			if ($sri)
+			if ($sri && ($allValues = ldap_get_entries($ldap, $sri)) && $allValues['count'])
 			{
-				$allValues 	= ldap_get_entries($ldap, $sri);
 				$groupDN 	= $allValues[0]['dn'];
 				$cn		= $allValues[0]['cn'][0];
 				$objectClass	= $allValues[0]['objectclass'];
