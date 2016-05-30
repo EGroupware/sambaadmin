@@ -35,8 +35,13 @@
 
 		function changePassword($_data)
 		{
-			if (!$GLOBALS['egw_info']['server']['ldap_host']) return false;
-
+			// are we using LDAP for accounts or authentication (fallback = LDAP with fallback to SQL)
+			if (empty($GLOBALS['egw_info']['server']['ldap_host']) ||
+				!($GLOBALS['egw_info']['server']['account_repository'] == 'ldap' ||
+					in_array($GLOBALS['egw_info']['server']['auth_type'], array('ldap', 'fallback'))))
+			{
+				return false;
+			}
 			return $this->sosambaadmin->changePassword($_data['account_id'], $_data['new_passwd']);
 		}
 
@@ -94,8 +99,12 @@
 
 		function updateAccount($accountData)
 		{
-			if (!$GLOBALS['egw_info']['server']['ldap_host']) return false;
-
+			// are we using LDAP for accounts
+			if (empty($GLOBALS['egw_info']['server']['ldap_host']) ||
+				$GLOBALS['egw_info']['server']['account_repository'] != 'ldap')
+			{
+				return false;
+			}
 			if(($accountID = (int)$accountData['account_id']))
 			{
 				$config = config::read('sambaadmin');
@@ -119,9 +128,13 @@
 
 		function updateGroup($data)
 		{
-			if (!$GLOBALS['egw_info']['server']['ldap_host']) return false;
-
-			if($accountID = (int)$data['account_id'])
+			// are we using LDAP for accounts
+			if (empty($GLOBALS['egw_info']['server']['ldap_host']) ||
+				$GLOBALS['egw_info']['server']['account_repository'] != 'ldap')
+			{
+				return false;
+			}
+			if(($accountID = (int)$data['account_id']))
 			{
 				return $this->sosambaadmin->updateGroup($accountID);
 			}
@@ -138,24 +151,33 @@
 
 		function verifyData($_newData)
 		{
+			unset($_newData);
+
 			return true;
 		}
 
 		public static function admin()
 		{
-			$appname = 'sambaadmin';
-			$file = array(
-				'Site Configuration'	=> egw::link('/index.php','menuaction=admin.admin_config.index&appname='.$appname.'&ajax=true'),
-				//'check ldap setup (experimental!!!)'	=> egw::link('/index.php','menuaction=sambaadmin.uisambaadmin.checkLDAPSetup'),
-			);
-			if ($GLOBALS['egw_info']['server']['ldap_host']) display_section($appname,$appname,$file);
+			// are we using LDAP for accounts
+			if (!empty($GLOBALS['egw_info']['server']['ldap_host']) &&
+				$GLOBALS['egw_info']['server']['account_repository'] == 'ldap')
+			{
+				$appname = 'sambaadmin';
+				$file = array(
+					'Site Configuration'	=> egw::link('/index.php','menuaction=admin.admin_config.index&appname='.$appname.'&ajax=true'),
+					//'check ldap setup (experimental!!!)'	=> egw::link('/index.php','menuaction=sambaadmin.uisambaadmin.checkLDAPSetup'),
+				);
+				display_section($appname,$appname,$file);
+			}
 		}
 
 		function edit_user()
 		{
 			global $menuData;
 
-			if ($GLOBALS['egw_info']['server']['ldap_host'])
+			// are we using LDAP for accounts
+			if (!empty($GLOBALS['egw_info']['server']['ldap_host']) &&
+				$GLOBALS['egw_info']['server']['account_repository'] == 'ldap')
 			{
 				$menuData[] = Array
 				(
